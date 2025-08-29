@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shakzz Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* ✅ Sticky Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 2000;
+      backdrop-filter: blur(6px);
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .header-left .logo img {
+      height: 50px;
+      border-radius: 6px;
+    }
+    .header-left nav {
+      display: flex;
+      gap: 20px;
+    }
+    .header-left nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .header-left nav a:hover {
+      color: #ffdf5d;
+    }
+
+    /* ✅ Section Setup */
+    section {
+      height: 100vh;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      padding-right: 5vw;
+      background-size: cover;
+      background-position: center;
+    }
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%);
+      z-index: 0;
+    }
+
+    /* ✅ Text Block (right side aligned like original) */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      position: relative;
+      z-index: 2;
+    }
+    h1, h2 {
+      margin: 0.3rem 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+    }
+    .line2 { font-size: clamp(2.5rem, 8vw, 7rem); }
+    .line3 { font-size: clamp(2rem, 6vw, 4rem); margin-top: 0.2rem; }
+
+    /* ✅ Projects Section */
+    .projects {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 50px;
+      gap: 20px;
+    }
+    .projects h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      opacity: 1;
+    }
+    .project-card {
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    /* ✅ YouTube video (bottom-left fixed) */
+    .youtube {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 320px;
+      height: 180px;
+      z-index: 3000;
+      border: 2px solid white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+
+    /* ✅ Cursor effect */
+    .cursor { display: inline-block; width: 0.6ch; animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <!-- ✅ Sticky Header -->
+  <header>
+    <div class="header-left">
+      <div class="logo">
+        <img src="https://static.beebom.com/wp-content/uploads/2025/01/jinwoo-solo-leveling.jpg?w=1250&quality=75" alt="Logo">
+      </div>
+      <nav>
+        <a href="#">HOME</a>
+        <a href="#">LIVE TV</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ✅ Section 1: Profile -->
+  <section style="background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/04/sung-jinwoo-solo-leveling.jpg');">
+    <div class="text-block">
+      <h1 id="line2" class="line2"></h1>
+      <h2 id="line3" class="line3"></h2>
+    </div>
+  </section>
+
+  <!-- ✅ Section 2: Projects -->
+  <section style="background-image: url('https://wallpapers.com/images/hd/solo-leveling-anime-4k-6e2uqcfrfvr84cqi.jpg');" class="projects">
+    <h1>🚀 My Creations</h1>
+    <div class="project-card">📺 IPTV Playlist App</div>
+    <div class="project-card">🌐 Cloudflare Proxy Worker</div>
+    <div class="project-card">📱 React Native TV Streaming App</div>
+  </section>
+
+  <!-- ✅ YouTube Video -->
+  <div class="youtube">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1" 
+      frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    // ✅ Typewriter effect
+    const lines = [
+      { id: "line2", text: "Hi I'm Shakzz" },
+      { id: "line3", text: "CUTE PH MODDER" }
+    ];
+    function typeLines(lines, index=0) {
+      if(index >= lines.length) return;
+      const element = document.getElementById(lines[index].id);
+      let i=0;
+      element.style.opacity = 1;
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+      cursor.textContent = "|";
+      element.appendChild(cursor);
+      const interval = setInterval(() => {
+        if(i < lines[index].text.length) {
+          element.insertBefore(document.createTextNode(lines[index].text[i]), cursor);
+          i++;
+        } else {
+          clearInterval(interval);
+          cursor.remove();
+          typeLines(lines, index+1);
+        }
+      }, 120);
+    }
+    typeLines(lines);
+  </script>
+</body>
+</html>
