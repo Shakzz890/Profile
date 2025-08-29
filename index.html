@@ -12,7 +12,13 @@
       overflow-x: hidden;
     }
 
-    /* ✅ Sticky Header */
+    /* Highlight style */
+    .highlight {
+      color: #ffdf5d; /* Gold yellow */
+      font-weight: bold;
+    }
+
+    /* Sticky Header */
     header {
       position: fixed;
       top: 0;
@@ -49,7 +55,7 @@
       color: #ffdf5d;
     }
 
-    /* ✅ Section Setup */
+    /* Section Setup */
     section {
       height: 100vh;
       display: flex;
@@ -68,7 +74,7 @@
       z-index: 0;
     }
 
-    /* ✅ Text Block */
+    /* Text Block */
     .text-block {
       display: flex;
       flex-direction: column;
@@ -85,7 +91,7 @@
     .line2 { font-size: clamp(2.5rem, 8vw, 6rem); }
     .line3 { font-size: clamp(2rem, 8vw, 2rem); margin-top: 0.2rem; }
 
-    /* ✅ Projects Section */
+    /* Projects Section */
     .projects {
       flex-direction: column;
       align-items: center;
@@ -112,13 +118,13 @@
       transform: scale(1.05);
     }
 
-    /* ✅ YouTube video (smaller bottom-left fixed) */
+    /* YouTube video (PIP) */
     .youtube {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      width: 200px;
-      height: 110px;
+      width: 320px;
+      height: 180px;
       z-index: 3000;
       border: 2px solid white;
       border-radius: 8px;
@@ -130,36 +136,37 @@
       height: 100%;
       position: relative;
       z-index: 1;
+      border-radius: 8px;
     }
 
-    /* ✅ Play with Sound button */
+    /* Play with Sound button */
     .play-sound-btn {
       position: absolute;
       top: -35px;
       left: 0;
-      background: gold;
+      background: #ffdf5d;
       color: black;
       font-weight: bold;
       border: none;
       padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
-      font-size: 0.8rem;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.7);
       z-index: 10;
+      font-size: 0.9rem;
       transition: opacity 0.5s ease;
     }
     .play-sound-btn:hover {
-      background: #ffcc00;
+      background: #ffd700;
     }
 
-    /* ✅ Cursor effect */
+    /* Cursor effect */
     .cursor { display: inline-block; width: 0.6ch; animation: blink 0.7s infinite; }
     @keyframes blink { 50% { opacity: 0; } }
   </style>
 </head>
 <body>
-  <!-- ✅ Sticky Header -->
+  <!-- Sticky Header -->
   <header>
     <div class="header-left">
       <div class="logo">
@@ -172,7 +179,7 @@
     </div>
   </header>
 
-  <!-- ✅ Section 1: Profile -->
+  <!-- Section 1: Profile -->
   <section style="background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/04/sung-jinwoo-solo-leveling.jpg');">
     <div class="text-block">
       <h1 id="line2" class="line2"></h1>
@@ -180,7 +187,7 @@
     </div>
   </section>
 
-  <!-- ✅ Section 2: Projects -->
+  <!-- Section 2: Projects -->
   <section style="background-image: url('https://wallpapers.com/images/hd/solo-leveling-anime-4k-6e2uqcfrfvr84cqi.jpg');" class="projects">
     <h1>🚀 My Creations</h1>
     <div class="project-card">📺 IPTV Playlist App</div>
@@ -188,32 +195,46 @@
     <div class="project-card">📱 React Native TV Streaming App</div>
   </section>
 
-  <!-- ✅ YouTube Video -->
+  <!-- YouTube Video with Play Button -->
   <div class="youtube">
-    <button class="play-sound-btn" onclick="playWithSound(this)">🔊 Play with Sound</button>
-    <iframe id="ytplayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1" 
+    <button class="play-sound-btn" id="playBtn">▶ Play Video with Sound</button>
+    <iframe id="ytplayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=1" 
       frameborder="0" allowfullscreen></iframe>
   </div>
 
   <script>
-    // ✅ Typewriter effect
+    // Typewriter effect with highlight
     const lines = [
       { id: "line2", text: "Hi I'm Shakzz!" },
       { id: "line3", text: "CUTE PH MODDER" }
     ];
+
     function typeLines(lines, index=0) {
       if(index >= lines.length) return;
       const element = document.getElementById(lines[index].id);
-      let i=0;
+      let i = 0;
       element.style.opacity = 1;
       const cursor = document.createElement("span");
       cursor.className = "cursor";
       cursor.textContent = "|";
       element.appendChild(cursor);
+
+      const text = lines[index].text;
       const interval = setInterval(() => {
-        if(i < lines[index].text.length) {
-          element.insertBefore(document.createTextNode(lines[index].text[i]), cursor);
-          i++;
+        if(i < text.length) {
+          // Highlight "Shakzz"
+          const char = text[i];
+          const span = document.createTextNode(char);
+          if (text.slice(i, i+6) === "Shakzz") {
+            const highlight = document.createElement("span");
+            highlight.className = "highlight";
+            highlight.textContent = "Shakzz";
+            element.insertBefore(highlight, cursor);
+            i += 6;
+          } else {
+            element.insertBefore(span, cursor);
+            i++;
+          }
         } else {
           clearInterval(interval);
           cursor.remove();
@@ -223,13 +244,13 @@
     }
     typeLines(lines);
 
-    // ✅ Play with sound function (button disappears after click)
-    function playWithSound(btn) {
-      const iframe = document.getElementById("ytplayer");
-      iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0";
-      btn.style.opacity = '0';
-      setTimeout(() => btn.style.display = 'none', 500);
-    }
+    // Play with sound button logic
+    const playBtn = document.getElementById("playBtn");
+    const iframe = document.getElementById("ytplayer");
+    playBtn.addEventListener("click", () => {
+      iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1";
+      playBtn.style.display = "none";
+    });
   </script>
 </body>
 </html>
