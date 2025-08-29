@@ -68,23 +68,22 @@
       z-index: 0;
     }
 
-    /* ✅ Text Block (right side aligned like original) */
-   /* ✅ Text Block (centered now) */
-  .text-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;   /* <-- changed from flex-end */
-    text-align: center;    /* <-- changed from right */
-    position: relative;
-    z-index: 2;
-  }
-  h1, h2 {
-    margin: 0.3rem 0;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    opacity: 0;
-  }
-  .line2 { font-size: clamp(2.5rem, 8vw, 7rem); }
-  .line3 { font-size: clamp(2rem, 8vw, 4rem); margin-top: 0.2rem; }
+    /* ✅ Text Block */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    h1, h2 {
+      margin: 0.3rem 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+    }
+    .line2 { font-size: clamp(2.5rem, 8vw, 6rem); }
+    .line3 { font-size: clamp(2rem, 8vw, 2rem); margin-top: 0.2rem; }
 
     /* ✅ Projects Section */
     .projects {
@@ -113,18 +112,42 @@
       transform: scale(1.05);
     }
 
-    /* ✅ YouTube video (bottom-left fixed) */
+    /* ✅ YouTube video (smaller bottom-left fixed) */
     .youtube {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      width: 320px;
-      height: 180px;
+      width: 200px;
+      height: 110px;
       z-index: 3000;
       border: 2px solid white;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+    .youtube iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ✅ Play with Sound button */
+    .play-sound-btn {
+      position: absolute;
+      top: -35px;
+      left: 0;
+      background: gold;
+      color: black;
+      font-weight: bold;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      font-size: 0.8rem;
+      transition: opacity 0.5s ease;
+    }
+    .play-sound-btn:hover {
+      background: #ffcc00;
     }
 
     /* ✅ Cursor effect */
@@ -164,7 +187,8 @@
 
   <!-- ✅ YouTube Video -->
   <div class="youtube">
-    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1" 
+    <button class="play-sound-btn" onclick="playWithSound(this)">🔊 Play with Sound</button>
+    <iframe id="ytplayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1" 
       frameborder="0" allowfullscreen></iframe>
   </div>
 
@@ -195,6 +219,14 @@
       }, 120);
     }
     typeLines(lines);
+
+    // ✅ Play with sound function
+    function playWithSound(btn) {
+      const iframe = document.getElementById("ytplayer");
+      iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0";
+      btn.style.opacity = '0';
+      setTimeout(() => btn.style.display = 'none', 500); // fade out smoothly
+    }
   </script>
 </body>
 </html>
