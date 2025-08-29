@@ -128,6 +128,8 @@
     .youtube iframe {
       width: 100%;
       height: 100%;
+      position: relative;
+      z-index: 1;
     }
 
     /* ✅ Play with Sound button */
@@ -144,6 +146,7 @@
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.6);
       font-size: 0.8rem;
+      z-index: 10;
       transition: opacity 0.5s ease;
     }
     .play-sound-btn:hover {
@@ -220,12 +223,12 @@
     }
     typeLines(lines);
 
-    // ✅ Play with sound function
+    // ✅ Play with sound function (button disappears after click)
     function playWithSound(btn) {
       const iframe = document.getElementById("ytplayer");
       iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0";
       btn.style.opacity = '0';
-      setTimeout(() => btn.style.display = 'none', 500); // fade out smoothly
+      setTimeout(() => btn.style.display = 'none', 500);
     }
   </script>
 </body>
