@@ -69,21 +69,22 @@
     }
 
     /* ✅ Text Block (right side aligned like original) */
-    .text-block {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      text-align: right;
-      position: relative;
-      z-index: 2;
-    }
-    h1, h2 {
-      margin: 0.3rem 0;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-      opacity: 0;
-    }
-    .line2 { font-size: clamp(2.5rem, 8vw, 7rem); }
-    .line3 { font-size: clamp(2rem, 6vw, 4rem); margin-top: 0.2rem; }
+   /* ✅ Text Block (centered now) */
+  .text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* <-- changed from flex-end */
+    text-align: center;    /* <-- changed from right */
+    position: relative;
+    z-index: 2;
+  }
+  h1, h2 {
+    margin: 0.3rem 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+  }
+  .line2 { font-size: clamp(2.5rem, 8vw, 7rem); }
+  .line3 { font-size: clamp(2rem, 8vw, 4rem); margin-top: 0.2rem; }
 
     /* ✅ Projects Section */
     .projects {
@@ -170,7 +171,7 @@
   <script>
     // ✅ Typewriter effect
     const lines = [
-      { id: "line2", text: "Hi I'm Shakzz" },
+      { id: "line2", text: "Hi I'm Shakzz!" },
       { id: "line3", text: "CUTE PH MODDER" }
     ];
     function typeLines(lines, index=0) {
